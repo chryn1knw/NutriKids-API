@@ -57,7 +57,7 @@ def validate_error_response(response, expected_field=None):
 # Test Cases
 
 def test_api_health_check():
-    """Basic health check endpoint (if available)"""
+    """Basic health check endpoint"""
     response = requests.get(f"{BASE_URL}/health")
     if response.status_code != 404:  # Only test if endpoint exists
         assert response.status_code == 200
@@ -185,7 +185,7 @@ def test_concurrent_requests(valid_payload):
 
 
 def test_documentation_exists():
-    """Check if API documentation is available (common practice)"""
+    """Check if API documentation is available"""
     response = requests.get(f"{BASE_URL}/docs")
     if response.status_code != 404:  # Only test if endpoint exists
         assert response.status_code == 200

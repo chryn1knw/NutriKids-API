@@ -22,6 +22,10 @@ food_data = pd.read_csv('./artifacts/data/food_data.csv')
 
 app = Flask(__name__)
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'ok'}), 200
+
 @app.route('/process', methods=['POST'])
 def process_data():
     try:
