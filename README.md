@@ -1,18 +1,19 @@
 ## Instalasi
 
 ```
-# Clone repo
+# Clone repository
 git clone https://github.com/namamu/NutriKids-API.git
 cd NutriKids-API
 
 # Buat virtual environment
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+# Aktifkan environment
+source .venv/bin/activate      # Untuk Linux/macOS
+.venv\Scripts\activate         # Untuk Windows
 
-# Install requirements
+# Install dependencies
 pip install -r requirements.txt
 ```
-
 ## Menjalankan API
 ```bash
 python src/app.py
