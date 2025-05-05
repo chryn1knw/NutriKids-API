@@ -6,19 +6,19 @@ import joblib
 from food_recommendation_model import FoodRecommendationModel
 
 # Load classification model and preprocessor
-classification_model = tf.keras.models.load_model('./artifacts/classification_model.h5')
-scaler = joblib.load('../artifacts/preprocessors/scaler.pkl')
-label_encoder = joblib.load('../artifacts/preprocessors/label_encoder.pkl')
+classification_model = tf.keras.models.load_model('./artifacts/models/classification_model.h5')
+scaler = joblib.load('./artifacts/preprocessors/scaler.pkl')
+label_encoder = joblib.load('./artifacts/preprocessors/label_encoder.pkl')
 
 # Load recommendation model and preprocessor
 recommendation_model = tf.keras.models.load_model(
-    './artifacts/recommendation_model.h5', custom_objects={'FoodRecommendationModel': FoodRecommendationModel}
+    './artifacts/models/recommendation_model.h5', custom_objects={'FoodRecommendationModel': FoodRecommendationModel}
 )
-child_preprocessor = joblib.load('../artifacts/preprocessors/child_preprocessor.pkl')
-food_preprocessor = joblib.load('../artifacts/preprocessors/food_preprocessor.pkl')
+child_preprocessor = joblib.load('./artifacts/preprocessors/child_preprocessor.pkl')
+food_preprocessor = joblib.load('./artifacts/preprocessors/food_preprocessor.pkl')
 
 # Load food data for recommendation
-food_data = pd.read_csv('../artifacts/data/food_data.csv')
+food_data = pd.read_csv('./artifacts/data/food_data.csv')
 
 app = Flask(__name__)
 
