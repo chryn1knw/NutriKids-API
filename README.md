@@ -22,3 +22,11 @@ python src/app.py
 ```
 pytest tests/test.py -v
 ```
+
+## Testing Coverage
+Kami menggunakan pytest untuk melakukan:
+
+-API Testing: Memastikan setiap endpoint menerima input dan merespons sesuai kontrak.
+-Integration Testing: Menguji integrasi antar komponen utama (input validation, model ML, dan filter makanan).
+-Performance Testing: Menjamin response time tetap optimal.
+-Concurrency Testing: Menilai kestabilan saat terjadi banyak permintaan bersamaan.
