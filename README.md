@@ -20,5 +20,5 @@ python src/app.py
 
 # Jalankan semua tes
 ```
-pytest tests/test_smoke_api.py -v
+pytest tests/test.py -v
 ```
