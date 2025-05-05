@@ -14,7 +14,7 @@ pip install -r requirements.txt
 ```
 
 ## Menjalankan API
-```
+```bash
 python src/app.py
 ```
 
@@ -35,6 +35,6 @@ Kami menggunakan `pytest` untuk memastikan kualitas dan stabilitas aplikasi mela
   Menilai kestabilan sistem saat menerima banyak permintaan secara bersamaan (simulasi trafik tinggi).
 
 # Jalankan semua tes
-```
+```bash
 pytest tests/test_main.py -v
 ```
