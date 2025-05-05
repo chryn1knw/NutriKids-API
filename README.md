@@ -36,5 +36,5 @@ Kami menggunakan `pytest` untuk memastikan kualitas dan stabilitas aplikasi mela
 
 # Jalankan semua tes
 ```
-pytest tests/test.py -v
+pytest tests/test_main.py -v
 ```
