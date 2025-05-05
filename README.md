@@ -32,7 +32,7 @@ Kami menggunakan `pytest` untuk memastikan kualitas dan stabilitas aplikasi mela
   Mengukur waktu respons dan memastikan performa tetap optimal pada berbagai skenario penggunaan.
 
 - **Concurrency Testing**  
-  Menilai kestabilan sistem saat menerima banyak permintaan secara bersamaan (simulasi trafik tinggi).
+  Menilai kestabilan sistem saat menerima banyak permintaan secara bersamaan.
 
 # Jalankan semua tes
 ```bash
