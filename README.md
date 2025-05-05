@@ -21,7 +21,7 @@ python src/app.py
 
 ## Testing Coverage
 
-Kami menggunakan `pytest` untuk memastikan kualitas dan stabilitas aplikasi melalui berbagai jenis pengujian berikut:
+`pytest` untuk memastikan kualitas dan stabilitas aplikasi melalui berbagai jenis pengujian berikut:
 
 - **API Testing**  
   Memastikan setiap endpoint menerima input dan memberikan respons sesuai dengan kontrak yang telah ditentukan.
