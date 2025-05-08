@@ -122,6 +122,7 @@ def test_invalid_ranges(valid_payload):
         assert response.status_code == 400
         validate_error_response(response, 'weight')
 
+
 def test_successful_recommendation(valid_payload):
     """Test successful food recommendation"""
     response = requests.post(f"{BASE_URL}/process", json=valid_payload)
@@ -137,6 +138,7 @@ def test_successful_recommendation(valid_payload):
     recommendations = data['Makanan yang direkomendasikan']
     assert len(recommendations) >= 1  # At least one recommendation
     assert all('label' in food for food in recommendations)
+
 
 def test_food_preferences_filtering(valid_payload):
     """Test that food preferences are respected"""
