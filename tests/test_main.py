@@ -187,6 +187,6 @@ def test_concurrent_requests(valid_payload):
 def test_documentation_exists():
     """Check if API documentation is available"""
     response = requests.get(f"{BASE_URL}/docs")
-    if response.status_code != 404:  # Only test if endpoint exists
+    if response.status_code != 404:
         assert response.status_code == 200
         assert 'text/html' in response.headers['Content-Type']

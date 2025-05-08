@@ -1,0 +1,246 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NutriKids API",
+    "version": "1.0.0",
+    "description": "API rekomendasi nutrisi berbasis parameter kesehatan anak"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Endpoint untuk memeriksa status ketersediaan API",
+        "responses": {
+          "200": {
+            "description": "API berjalan normal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok",
+                      "description": "Status service"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-05T12:34:56.789Z",
+                      "description": "Waktu server saat request"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "1.0.0",
+                      "description": "Versi API"
+                    }
+                  }
+                },
+                "example": {
+                  "status": "ok",
+                  "timestamp": "2023-11-05T12:34:56.789Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/process": {
+      "post": {
+        "summary": "Proses data nutrisi anak",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "age": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 18,
+                    "example": 18,
+                    "description": "Usia dalam tahun"
+                  },
+                  "height": {
+                    "type": "number",
+                    "minimum": 65,
+                    "maximum": 300,
+                    "example": 170,
+                    "description": "Tinggi badan dalam cm"
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 6,
+                    "maximum": 200,
+                    "example": 80,
+                    "description": "Berat badan dalam kg"
+                  },
+                  "gender": {
+                    "type": "integer",
+                    "enum": [0, 1],
+                    "example": 0,
+                    "description": "0 = Perempuan, 1 = Laki-laki"
+                  },
+                  "food_preferences": {
+                    "type": "string",
+                    "example": "Non-Vegetarian",
+                    "description": "Preferensi makanan (Vegan/Vegetarian/Non-Vegetarian)"
+                  },
+                  "health_conditions": {
+                    "type": "string",
+                    "example": "Sehat",
+                    "description": "Kondisi kesehatan khusus"
+                  }
+                },
+                "required": [
+                  "age", "height", "weight", "gender",
+                  "food_preferences", "health_conditions"
+                ]
+              },
+              "example": {
+                "age": 18,
+                "height": 170,
+                "weight": 80,
+                "gender": 0,
+                "food_preferences": "Non-Vegetarian",
+                "health_conditions": "Sehat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rekomendasi nutrisi berhasil di-generate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Status Gizi": {
+                      "type": "string",
+                      "example": "Normal",
+                      "description": "Kategori status gizi"
+                    },
+                    "Index Masa Tubuh": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 27.68,
+                      "description": "Nilai BMI (Body Mass Index)"
+                    },
+                    "Persentase Lemak Tubuh": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 31.96,
+                      "description": "Persentase lemak tubuh"
+                    },
+                    "Tingkat Metabolisme Basal": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 1636.07,
+                      "description": "Kalori yang dibutuhkan saat istirahat (BMR)"
+                    },
+                    "Makanan yang direkomendasikan": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 465,
+                            "description": "ID makanan"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Ikan Layang",
+                            "description": "Nama makanan"
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "Non-Vegetarian",
+                            "description": "Kategori makanan"
+                          },
+                          "calories": {
+                            "type": "number",
+                            "example": 109,
+                            "description": "Kalori per sajian (kkal)"
+                          },
+                          "proteins": {
+                            "type": "number",
+                            "example": 22,
+                            "description": "Protein dalam gram"
+                          },
+                          "fat": {
+                            "type": "number",
+                            "example": 1.7,
+                            "description": "Lemak dalam gram"
+                          },
+                          "carbohydrate": {
+                            "type": "number",
+                            "example": 0,
+                            "description": "Karbohidrat dalam gram"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "Status Gizi": "Normal",
+                  "Index Masa Tubuh": 27.68,
+                  "Persentase Lemak Tubuh": 31.96,
+                  "Tingkat Metabolisme Basal": 1636.07,
+                  "Makanan yang direkomendasikan": [
+                    {
+                      "id": 465,
+                      "name": "Ikan Layang",
+                      "label": "Non-Vegetarian",
+                      "calories": 109,
+                      "proteins": 22,
+                      "fat": 1.7,
+                      "carbohydrate": 0
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Input tidak valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Field 'age' is required."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,24 @@ import pandas as pd
 import numpy as np
 import joblib
 from food_recommendation_model import FoodRecommendationModel
+from datetime import datetime
+from flask_swagger_ui import get_swaggerui_blueprint
+
+# Inisialisasi Flask app
+app = Flask(__name__)
+
+SWAGGER_URL = '/docs'
+API_URL = '/static/swagger.json'
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Nutrition API",
+    }
+)
+
+app.register_blueprint(swaggerui_blueprint)
 
 # Load classification model and preprocessor
 classification_model = tf.keras.models.load_model('./artifacts/models/classification_model.h5')
@@ -20,11 +38,13 @@ food_preprocessor = joblib.load('./artifacts/preprocessors/food_preprocessor.pkl
 # Load food data for recommendation
 food_data = pd.read_csv('./artifacts/data/food_data.csv')
 
-app = Flask(__name__)
-
 @app.route('/health', methods=['GET'])
 def health_check():
-    return jsonify({'status': 'ok'}), 200
+    return jsonify({
+        'status': 'ok',
+        'timestamp': datetime.utcnow().isoformat(),
+        'version': '1.0.0',
+    }), 200
 
 @app.route('/process', methods=['POST'])
 def process_data():
