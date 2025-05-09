@@ -29,13 +29,7 @@ python src/app.py
 - **Integration Testing**  
   Menguji alur kerja antar komponen utama, termasuk validasi input, pemrosesan model machine learning, dan sistem rekomendasi makanan.
 
-- **Performance Testing**  
-  Mengukur waktu respons dan memastikan performa tetap optimal pada berbagai skenario penggunaan.
-
-- **Concurrency Testing**  
-  Menilai kestabilan sistem saat menerima banyak permintaan secara bersamaan.
-
 # Jalankan semua tes
 ```bash
-pytest tests/test_main.py -v
+pytest tests/ -v
 ```
