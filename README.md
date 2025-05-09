@@ -7,6 +7,7 @@ cd NutriKids-API
 
 # Buat virtual environment
 python -m venv .venv
+
 # Aktifkan environment
 source .venv/bin/activate      # Untuk Linux/macOS
 .venv\Scripts\activate         # Untuk Windows
