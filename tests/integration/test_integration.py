@@ -3,9 +3,7 @@ from tests.conftest import BASE_URL, API_KEY
 
 
 def test_food_recommendation(valid_payload):
-    headers = {
-        "x-api-key": API_KEY
-    }
+    headers = {"x-api-key": API_KEY}
     response = requests.post(f"{BASE_URL}/process", headers=headers, json=valid_payload)
     assert response.status_code == 200
 
@@ -16,9 +14,7 @@ def test_food_recommendation(valid_payload):
 
 
 def test_preference_filtering(valid_payload):
-    headers = {
-        "x-api-key": API_KEY
-    }
+    headers = {"x-api-key": API_KEY}
     payload = valid_payload.copy()
     payload['food_preferences'] = "Vegan"
     response = requests.post(f"{BASE_URL}/process", headers=headers, json=payload)

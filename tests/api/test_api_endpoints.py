@@ -21,10 +21,7 @@ def test_health_endpoint():
     assert response_json.get('version') == '1.0.0', "Version should be '1.0.0'"
 
 def test_process_endpoint(valid_payload):
-    headers = {
-        "x-api-key": API_KEY
-    }
-
+    headers = {"x-api-key": API_KEY}
     response = requests.post(f"{BASE_URL}/process", headers=headers, json=valid_payload)
     assert response.status_code == 200
     validate_response_structure(response)
@@ -39,9 +36,7 @@ def test_process_with_missing_api_key(valid_payload):
     assert 'Unauthorized' in response.text
 
 def test_process_with_invalid_api_key(valid_payload):
-    headers = {
-        "x-api-key": "wrong-key"
-    }
+    headers = {"x-api-key": "wrong-key"}
     response = requests.post(f"{BASE_URL}/process", headers=headers, json=valid_payload)
     assert response.status_code == 401
     assert 'Unauthorized' in response.text

@@ -2,7 +2,7 @@
 
 ```
 # Clone repository
-git clone https://github.com/namamu/NutriKids-API.git
+git clone https://github.com/chryn1knw/NutriKids-API.git
 cd NutriKids-API
 
 # Buat virtual environment
