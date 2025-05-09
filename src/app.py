@@ -3,12 +3,17 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import joblib
+import os
 from food_recommendation_model import FoodRecommendationModel
 from datetime import datetime
 from flask_swagger_ui import get_swaggerui_blueprint
+from dotenv import load_dotenv
 
 # Inisialisasi Flask app
 app = Flask(__name__)
+
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
 SWAGGER_URL = '/docs'
 API_URL = '/static/swagger.json'
@@ -48,14 +53,21 @@ def health_check():
 
 @app.route('/process', methods=['POST'])
 def process_data():
+    if not verify_api_key(request):
+        return jsonify({'error': 'Unauthorized. Invalid or missing API Key.'}), 401
+
     try:
         data = request.get_json(force=True)
-        
-        # Validasi input
+
         required_fields = ['age', 'height', 'weight', 'gender', 'food_preferences', 'health_conditions']
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f"Field '{field}' is required."}), 400
+
+        valid_health_conditions = ['Sehat', 'Anemia', 'Hypertension', 'Diabetes', 'Obesity']
+        health_conditions = data['health_conditions']
+        if health_conditions not in valid_health_conditions:
+            return jsonify({'error': 'Invalid health condition'}), 400
 
         age = data['age']
         height_cm = data['height']
@@ -116,6 +128,13 @@ def process_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+def verify_api_key(request):
+    key_from_header = request.headers.get("x-api-key")
+    if key_from_header != API_KEY:
+        return False
+    return True
+
 
 def calculate_bmi(height_cm, weight_kg):
     height_m = height_cm / 100
