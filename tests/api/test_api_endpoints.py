@@ -40,3 +40,16 @@ def test_process_with_invalid_api_key(valid_payload):
     response = requests.post(f"{BASE_URL}/process", headers=headers, json=valid_payload)
     assert response.status_code == 401
     assert 'Unauthorized' in response.text
+
+def test_swagger_ui_accessible():
+    """Test bahwa Swagger UI dapat diakses dan mengembalikan HTML"""
+    response = requests.get(f"{BASE_URL}/docs")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["Content-Type"]
+    assert '<div id="swagger-ui">' in response.text
+
+def test_openapi_spec_exists():
+    """Test bahwa file spesifikasi OpenAPI tersedia"""
+    response = requests.get(f"{BASE_URL}/static/swagger.json")
+    assert response.status_code == 200
+    assert response.json().get("openapi", "").startswith("3.0.")
