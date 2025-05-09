@@ -1,15 +1,13 @@
-from flask import Flask, request, jsonify
+import os, joblib
 import tensorflow as tf
 import pandas as pd
 import numpy as np
-import joblib
-import os
+from flask import Flask, request, jsonify
 from food_recommendation_model import FoodRecommendationModel
 from datetime import datetime
 from flask_swagger_ui import get_swaggerui_blueprint
 from dotenv import load_dotenv
 
-# Inisialisasi Flask app
 app = Flask(__name__)
 
 load_dotenv()
@@ -134,7 +132,6 @@ def verify_api_key(request):
     if key_from_header != API_KEY:
         return False
     return True
-
 
 def calculate_bmi(height_cm, weight_kg):
     height_m = height_cm / 100
